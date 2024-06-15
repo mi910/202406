@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>出勤登録</title>
+ <link rel="stylesheet" th:href="@{/css/goingRegistration.css}">
+</head>
+<body>
+  <div class="container">
+    <div th:if="${validationError}" th:each="error : ${validationError}">
+      <label class="text-danger" th:text="${error}"></label>
+    </div>
+	
+    <form th:action="@{/goingRepository/create}" th:object="${goingRepository}" th:method="post">
+ 	   <div class="wrapper"></div>
+		 <div class="header">出勤登録</div>
+		
+		 
+		 <div class="form-group">
+        <label>勤怠ID<span class="text-danger"></span></label>
+        <input type="text" th:field="*{attendance_id}" class="form-control" value="自動で採番される値" disabled>
+      </div>
+      
+      <div class="form-group">
+        <label>ユーザーID<span class="text-danger"></span></label>
+        <input type="text" th:field="*{user_id}" class="form-control" disabled>
+      </div>
+
+
+      <div class="form-group">
+        <label>ステータス<span class="text-danger"></span></label>
+        <select class="form-group" id="status" disabled>
+            <option value="出勤">出勤</option>
+            <option value="遅刻">遅刻</option>
+            <option value="欠席">欠席</option>
+            <option value="欠席">代休</option>
+            <option value="欠席">所定休</option>
+            <option value="欠席">有休</option>
+            <option value="欠席">その他</option>
+          </select>
+      </div>
+
+      <div class="form-group">
+        <label>出勤日<span class="text-danger"></span></label>
+        <input type="date" th:field="*{going_date}" class="form-control" data-toggle="datepicker" disabled >
+      </div>
+      
+      <div class="form-group">
+        <label>出勤時間<span class="text-danger"></span></label>
+        <input type="time" th:field="*{going_time}" class="form-control" disabled>
+      </div>
+      
+      <div class="form-group">
+        <label>備考<span class="text-danger"></span></label>
+        <input type="text" th:field="*{remarks}" class="form-control">
+      </div>
+      
+
+      <br />
+      <div class="text-center">
+        <a href="/goingRepository/list" class="btn btn-secondary">キャンセル</a>
+        <input type="submit" value="　登録　" class="btn btn-primary">
+      </div>
+    </form>
+  </div>
+  <div class="footer"></div>
+   
+</body>
+</html>
